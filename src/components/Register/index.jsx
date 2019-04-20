@@ -2,11 +2,11 @@ import React from 'react'
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { shape, func } from 'prop-types';
+import { func, shape } from 'prop-types';
 
-import { login } from '../../redux/action/auth';
+import { register } from '../../redux/action/auth';
 
-import LoginForm from './LoginForm';
+import RegisterForm from './RegisterForm';
 
 const Root = styled.div`
   font-family: sans-serif;
@@ -20,41 +20,39 @@ const Header = styled.h1`
   margin: 50px 0;
 `;
 
-const Login = (props) => {
+const Register = (props) => {
   const { actions, history } = props;
 
   const submit = (data) => (
-    actions.login(data)
+    actions.register(data)
       .then(json => {
         if (json.login) {
           history.push('/dashboard');
         }
-
-        return 'Invalid credentials';
       })
   );
 
   return (
     <Root>
-      <Header>Login page</Header>
-      <LoginForm submit={submit} />
+      <Header>Register page</Header>
+      <RegisterForm submit={submit} />
     </Root>
   );
 };
 
-Login.propTypes = {
+Register.propTypes = {
+  actions: shape({
+    register: func.isRequired,
+  }).isRequired,
   history: shape({
     push: func.isRequired,
   }).isRequired,
-  actions: shape({
-    login: func.isRequired,
-  }).isRequired,
-}
+};
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({
-    login,
+    register,
   }, dispatch),
 });
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(null, mapDispatchToProps)(Register);

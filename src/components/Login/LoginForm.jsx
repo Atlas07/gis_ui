@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
 
+import { ERRORS } from '../constants';
+
 const Root = styled.form`
   display: flex;
   flex-direction: column;
@@ -34,11 +36,6 @@ const Submit = styled.button`
   border: 1px solid #cbf0d9;
   cursor: pointer;
 `;
-
-const ERRORS = {
-  invalidInput: 'Check your input\'s data',
-  invalidCredentials: 'Invalid creadentials provided',
-}
 
 const LoginForm = ({ submit }) => {
   const [inputsState, setInputsState] = useState({
