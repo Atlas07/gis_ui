@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import { func, string, node } from 'prop-types';
+import React from "react";
+import styled from "styled-components";
+import { func, string, node } from "prop-types";
 
 const Root = styled.div`
   font-family: sans-serif;
@@ -13,23 +13,24 @@ const Header = styled.h1`
   margin: 50px 0;
 `;
 
-const Auth = (props) => {
-  const {
-    action, push, header, form,
-  } = props;
+const Auth = props => {
+  const { action, push, header, form, cities, univercities } = props;
 
   const Form = form;
 
-  const submit = data => action(data).then((json) => {
-    if (json.login) {
-      push('/dashboard');
-    }
-  });
+  const submit = data =>
+    action(data).then(json => {
+      if (json.login) {
+        push("/dashboard");
+      }
+
+      return json;
+    });
 
   return (
     <Root>
       <Header>{header}</Header>
-      <Form submit={submit} />
+      <Form submit={submit} cities={cities} univercities={univercities} />
     </Root>
   );
 };

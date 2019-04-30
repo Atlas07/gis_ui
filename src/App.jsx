@@ -2,14 +2,20 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 
 import Dashboard from "./components/Dashboard";
+
 import Login from "./components/Login";
-import Register from "./components/Register";
+
+import EmployerRegister from "./components/EmployerRegister";
+import RecruiterRegister from "./components/RecruiterRegister";
+import WorkerRegister from "./components/WorkerRegister";
 
 const App = () => (
   <Switch>
-    <Route path="/login" component={Login} />
-    <Route path="/register" component={Register} />
-    <Route path="/" component={Dashboard} />
+    <Route path='/login' component={Login} />
+    <Route path='/register/employer' component={EmployerRegister} />
+    <Route path='/register/recruiter' component={RecruiterRegister} />
+    <Route path='/register/worker' component={WorkerRegister} />
+    <Route path='/' component={Dashboard} />
   </Switch>
 );
 

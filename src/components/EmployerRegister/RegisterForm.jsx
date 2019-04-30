@@ -1,5 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { func } from 'prop-types';
+
+import { ERRORS } from '../constants';
 
 const Root = styled.form`
   display: flex;
@@ -49,30 +52,25 @@ const RegisterForm = ({ submit }) => {
 
   const [errorState, setErrorState] = useState('');
 
-  const handleSubmit = (e, submit) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     submit(inputsState)
-      .catch(err => setErrorState('Such login already exists'));
-  }
+      .catch(() => setErrorState(ERRORS.userExists));
+  };
 
   const handleChange = (e) => {
     setInputsState({
       ...inputsState,
       [e.target.name]: e.target.value,
     });
-  }
+  };
 
   return (
     <Root>
       {!!errorState && <Message>{errorState}</Message>}
       <Field>
         <label htmlFor="login">Login</label>
-        <Input
-          type="text"
-          name="login"
-          placeholder="example@gmail.com"
-          onChange={handleChange}
-        />
+        <Input type="text" name="login" placeholder="example@gmail.com" onChange={handleChange} />
       </Field>
       <Field>
         <label htmlFor="password">Password</label>
@@ -85,12 +83,7 @@ const RegisterForm = ({ submit }) => {
       </Field>
       <Field>
         <label htmlFor="name">Name</label>
-        <Input
-          type="text"
-          name="name"
-          placeholder="your name"
-          onChange={handleChange}
-        />
+        <Input type="text" name="name" placeholder="your name" onChange={handleChange} />
       </Field>
       <Field>
         <label htmlFor="description">Description</label>
@@ -112,34 +105,23 @@ const RegisterForm = ({ submit }) => {
       </Field>
       <Field>
         <label htmlFor="coordX">Coord x</label>
-        <Input
-          type="text"
-          name="coordX"
-          placeholder="0.0"
-          onChange={handleChange}
-        />
+        <Input type="text" name="coordX" placeholder="0.0" onChange={handleChange} />
       </Field>
       <Field>
         <label htmlFor="coordY">Coord y</label>
-        <Input
-          type="text"
-          name="coordY"
-          placeholder="0.0"
-          onChange={handleChange}
-        />
+        <Input type="text" name="coordY" placeholder="0.0" onChange={handleChange} />
       </Field>
       <Field>
         <label htmlFor="city">City</label>
-        <Input
-          type="text"
-          name="city"
-          placeholder="Your city"
-          onChange={handleChange}
-        />
+        <Input type="text" name="city" placeholder="Your city" onChange={handleChange} />
       </Field>
       <Submit onClick={e => handleSubmit(e, submit)}>Register</Submit>
     </Root>
   );
+};
+
+RegisterForm.propTypes = {
+  submit: func.isRequired,
 };
 
 export default RegisterForm;

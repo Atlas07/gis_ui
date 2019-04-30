@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { func } from 'prop-types';
 
 import { ERRORS } from '../constants';
 
@@ -45,7 +46,17 @@ const LoginForm = ({ submit }) => {
 
   const [validationErrors, setValidationErrors] = useState('');
 
-  const handleSubmit = (e, submit) => {
+  const isValid = () => {
+    const { login, password } = inputsState;
+
+    if (login === '' || password === '') {
+      return false;
+    }
+
+    return true;
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     setValidationErrors('');
 
@@ -55,28 +66,18 @@ const LoginForm = ({ submit }) => {
     }
 
     submit(inputsState)
-      .then(res => {
+      .then(() => {
         setValidationErrors(ERRORS.invalidCredentials);
       })
       .catch(err => console.log(err));
-  }
-
-  const isValid = () => {
-    const { login, password } = inputsState;
-
-    if (login === '' || password === '') {
-      return false;
-    }
-
-    return true;
-  }
+  };
 
   const handleChange = (e) => {
     setInputsState({
       ...inputsState,
       [e.target.name]: e.target.value,
     });
-  }
+  };
 
   return (
     <Root>
@@ -86,6 +87,7 @@ const LoginForm = ({ submit }) => {
         <Input
           type="text"
           name="login"
+          id="login"
           placeholder="example@gmail.com"
           onChange={handleChange}
         />
@@ -95,6 +97,7 @@ const LoginForm = ({ submit }) => {
         <Input
           type="password"
           name="password"
+          id="password"
           placeholder="your password"
           onChange={handleChange}
         />
@@ -102,6 +105,10 @@ const LoginForm = ({ submit }) => {
       <Submit onClick={e => handleSubmit(e, submit)}>Login</Submit>
     </Root>
   );
+};
+
+LoginForm.propTypes = {
+  submit: func.isRequired,
 };
 
 export default LoginForm;
