@@ -1,9 +1,0 @@
-{
-  "extends": "airbnb",
-  "plugins": ["prettier"],
-  "rules": {
-    "no-console": "warn",
-    "curly": ["error", "all"],
-    "jsx-a11y/label-has-associated-control": "warn"
-  }
-}

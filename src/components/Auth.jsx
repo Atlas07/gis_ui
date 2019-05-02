@@ -1,6 +1,8 @@
-import React from "react";
-import styled from "styled-components";
-import { func, string, node } from "prop-types";
+import React from 'react';
+import styled from 'styled-components';
+import {
+  func, string, node, arrayOf, shape,
+} from 'prop-types';
 
 const Root = styled.div`
   font-family: sans-serif;
@@ -13,19 +15,20 @@ const Header = styled.h1`
   margin: 50px 0;
 `;
 
-const Auth = props => {
-  const { action, push, header, form, cities, univercities } = props;
+const Auth = (props) => {
+  const {
+    action, push, header, form, cities, univercities,
+  } = props;
 
   const Form = form;
 
-  const submit = data =>
-    action(data).then(json => {
-      if (json.login) {
-        push("/dashboard");
-      }
+  const submit = data => action(data).then((json) => {
+    if (json.login) {
+      push('/dashboard');
+    }
 
-      return json;
-    });
+    return json;
+  });
 
   return (
     <Root>
@@ -40,6 +43,8 @@ Auth.propTypes = {
   push: func.isRequired,
   header: string.isRequired,
   form: node.isRequired,
+  cities: arrayOf(shape({})).isRequired,
+  univercities: arrayOf(shape({})).isRequired,
 };
 
 export default Auth;

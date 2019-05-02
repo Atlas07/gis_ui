@@ -1,23 +1,23 @@
-import axios from "axios";
-import * as types from "../constants/city";
+import axios from 'axios';
+import * as types from '../constants/city';
 
-export const fetchCities = () => dispatch => (
-  axios.get(
-    "http://localhost:8080/city",
+// eslint-disable-next-line
+export const fetchCities = () => dispatch => axios
+  .get(
+    'http://localhost:8080/city',
     {},
     {
       headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
       },
     },
   )
-    .then((res) => {
-      dispatch({
-        type: types.FETCH_CITIES,
-        payload: res.data,
-      });
+  .then((res) => {
+    dispatch({
+      type: types.FETCH_CITIES,
+      payload: res.data,
+    });
 
-      return res.data;
-    })
-);
+    return res.data;
+  });

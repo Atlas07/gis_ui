@@ -2,5 +2,7 @@
   "endOfLine": "lf",
   "jsxSingleQuote": true,
   "printWidth": 100,
-  "trailingComma": "all"
+  "trailingComma": "all",
+  "singleQuote": true,
+  "tabWidth": 2
 }
