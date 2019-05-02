@@ -8,6 +8,13 @@ const initialState = {
 const vacancy = (state = initialState, action = {}) => {
   switch (action.type) {
     case types.FETCH_VACANCIES:
+      if (action.filterStr) {
+        return {
+          ...state,
+          vacancies: action.payload.filter(item => item.position.includes(action.filterStr)),
+        };
+      }
+
       return {
         ...state,
         vacancies: action.payload,
