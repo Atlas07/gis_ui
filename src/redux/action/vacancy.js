@@ -7,11 +7,13 @@ const HEADERS = {
   'Content-Type': 'application/json',
 };
 
-export const fetchVacancies = filterStr => dispatch => axios.get(VACANCY_URL, {}, { headers: HEADERS }).then((res) => {
+export const fetchVacancies = (filterStr, salary, city) => dispatch => axios.get(VACANCY_URL, {}, { headers: HEADERS }).then((res) => {
   dispatch({
     type: types.FETCH_VACANCIES,
     payload: res.data,
     filterStr,
+    salary,
+    city,
   });
 
   return res.data;

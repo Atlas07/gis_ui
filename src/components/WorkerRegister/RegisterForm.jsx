@@ -1,8 +1,10 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { func, string, shape, arrayOf, number } from "prop-types";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import {
+  func, string, shape, arrayOf, number,
+} from 'prop-types';
 
-import { ERRORS } from "../constants";
+import { ERRORS } from '../constants';
 
 const Root = styled.form`
   display: flex;
@@ -47,38 +49,36 @@ const Submit = styled.button`
 
 const RegisterForm = ({ submit, cities, univercities }) => {
   const [inputsState, setInputsState] = useState({
-    login: "",
-    password: "",
-    name: "",
-    position: "",
-    experience: "",
-    description: "",
-    phoneNumber: "",
-    email: "",
+    login: '',
+    password: '',
+    name: '',
+    position: '',
+    experience: '',
+    description: '',
+    phoneNumber: '',
+    email: '',
   });
-  const [errorState, setErrorState] = useState("");
+  const [errorState, setErrorState] = useState('');
   const [cityState, setCityState] = useState(cities[0].id);
   const [univercityState, setUnivercityState] = useState(univercities[0].id);
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    submit({ ...inputsState, city: cityState, univercity: univercityState }).catch(() =>
-      setErrorState(ERRORS.userExists),
-    );
+    submit({ ...inputsState, city: cityState, univercity: univercityState }).catch(() => setErrorState(ERRORS.userExists));
   };
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setInputsState({
       ...inputsState,
       [e.target.name]: e.target.value,
     });
   };
 
-  const handleCityChange = e => {
+  const handleCityChange = (e) => {
     setCityState(e.target.value);
   };
 
-  const handleUnivercityChange = e => {
+  const handleUnivercityChange = (e) => {
     setUnivercityState(e.target.value);
   };
 
@@ -86,67 +86,67 @@ const RegisterForm = ({ submit, cities, univercities }) => {
     <Root>
       {!!errorState && <Message>{errorState}</Message>}
       <Field>
-        <label htmlFor='login'>Login</label>
-        <Input type='text' name='login' placeholder='example@gmail.com' onChange={handleChange} />
+        <label htmlFor="login">Login</label>
+        <Input type="text" name="login" placeholder="example@gmail.com" onChange={handleChange} />
       </Field>
       <Field>
-        <label htmlFor='password'>Password</label>
+        <label htmlFor="password">Password</label>
         <Input
-          type='password'
-          name='password'
-          placeholder='your password'
+          type="password"
+          name="password"
+          placeholder="your password"
           onChange={handleChange}
         />
       </Field>
       <Field>
-        <label htmlFor='name'>Name</label>
-        <Input type='text' name='name' placeholder='your name' onChange={handleChange} />
+        <label htmlFor="name">Name</label>
+        <Input type="text" name="name" placeholder="your name" onChange={handleChange} />
       </Field>
       <Field>
-        <label htmlFor='position'>Position</label>
-        <Input type='text' name='position' placeholder='position' onChange={handleChange} />
+        <label htmlFor="position">Position</label>
+        <Input type="text" name="position" placeholder="position" onChange={handleChange} />
       </Field>
       <Field>
-        <label htmlFor='experience'>Experience</label>
+        <label htmlFor="experience">Experience</label>
         <Input
-          type='text'
-          name='experience'
-          placeholder='your experience'
+          type="text"
+          name="experience"
+          placeholder="your experience"
           onChange={handleChange}
         />
       </Field>
       <Field>
-        <label htmlFor='description'>Description</label>
+        <label htmlFor="description">Description</label>
         <Input
-          type='text'
-          name='description'
-          placeholder='your description'
+          type="text"
+          name="description"
+          placeholder="your description"
           onChange={handleChange}
         />
       </Field>
       <Field>
-        <label htmlFor='phoneNumber'>Phone number</label>
-        <Input type='text' name='phoneNumber' placeholder='+380 ...' onChange={handleChange} />
+        <label htmlFor="phoneNumber">Phone number</label>
+        <Input type="text" name="phoneNumber" placeholder="+380 ..." onChange={handleChange} />
       </Field>
       <Field>
-        <label htmlFor='email'>Email</label>
-        <Input type='text' name='email' placeholder='example@gmail.com' onChange={handleChange} />
+        <label htmlFor="email">Email</label>
+        <Input type="text" name="email" placeholder="example@gmail.com" onChange={handleChange} />
       </Field>
       <Field>
-        <label htmlFor='city'>City</label>
+        <label htmlFor="city">City</label>
         <Select onChange={handleCityChange}>
           {cities.map(city => (
-            <option name='city' value={city.id} key={city.id}>
+            <option name="city" value={city.id} key={city.id}>
               {city.name}
             </option>
           ))}
         </Select>
       </Field>
       <Field>
-        <label htmlFor='univercity'>Univercity</label>
+        <label htmlFor="univercity">Univercity</label>
         <Select onChange={handleUnivercityChange}>
           {univercities.map(univercity => (
-            <option name='univercity' value={univercity.id} key={univercity.id}>
+            <option name="univercity" value={univercity.id} key={univercity.id}>
               {univercity.name}
             </option>
           ))}

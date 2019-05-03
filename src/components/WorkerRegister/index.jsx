@@ -1,17 +1,21 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { func, shape, arrayOf, number, string } from "prop-types";
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import {
+  func, shape, arrayOf, number, string,
+} from 'prop-types';
 
-import { workerRegister } from "../../redux/action/auth";
-import { fetchCities } from "../../redux/action/city";
-import { fetchUnivercities } from "../../redux/action/education";
+import { workerRegister } from '../../redux/action/auth';
+import { fetchCities } from '../../redux/action/city';
+import { fetchUnivercities } from '../../redux/action/education';
 
-import RegisterForm from "./RegisterForm";
-import Auth from "../Auth";
+import RegisterForm from './RegisterForm';
+import Auth from '../Auth';
 
-const WorkerRegister = props => {
-  const { actions, history, cities, univercities } = props;
+const WorkerRegister = (props) => {
+  const {
+    actions, history, cities, univercities,
+  } = props;
 
   useEffect(() => {
     actions.fetchCities();
@@ -19,12 +23,12 @@ const WorkerRegister = props => {
   }, []);
 
   if (!cities || !univercities) {
-    return "Loading";
+    return 'Loading';
   }
 
   return (
     <Auth
-      header='Register worker page'
+      header="Register worker page"
       form={RegisterForm}
       push={history.push}
       action={actions.workerRegister}
