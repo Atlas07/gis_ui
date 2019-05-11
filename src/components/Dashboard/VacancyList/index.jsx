@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { arrayOf, shape } from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const Vacancy = styled.div`
   display: flex;
@@ -8,7 +9,6 @@ const Vacancy = styled.div`
   border: 1px solid #ccc;
   margin: 10px;
   padding: 15px;
-  cursor: pointer;
   border-radius: 3px;
   max-width: 300px;
 `;
@@ -19,27 +19,44 @@ const Root = styled.div`
 
 const Field = styled.p``;
 
-const VacancyList = ({ list }) => (
-  <Root>
-    {list.map(vacancy => (
-      <Vacancy key={vacancy.id}>
-        <Field>
-          Position:
-          {vacancy.position}
-        </Field>
-        <Field>
-          Salary:
-          {vacancy.salary}
+const Button = styled(Link)`
+  border-radius: 2px;
+  width: 100%;
+  margin-top: 10px;
+  font-size: 16px;
+  padding: 5px 0;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  border: 1px solid #ccc;
+`;
+
+const VacancyList = ({ list }) => {
+  const showVacancy = () => {};
+
+  return (
+    <Root>
+      {list.map(vacancy => (
+        <Vacancy key={vacancy.vacancyId}>
+          <Field>
+            Position:
+            {vacancy.position}
+          </Field>
+          <Field>
+            Salary:
+            {vacancy.salary}
 $
-        </Field>
-        <Field>
-          City:
-          {vacancy.cityName}
-        </Field>
-      </Vacancy>
-    ))}
-  </Root>
-);
+          </Field>
+          <Field>
+            City:
+            {vacancy.cityName}
+          </Field>
+          <Button onClick={showVacancy} to={`/vacancy/${vacancy.vacancyId}`}>Get info</Button>
+        </Vacancy>
+      ))}
+    </Root>
+  );
+};
 
 VacancyList.propTypes = {
   list: arrayOf(shape({})).isRequired,
