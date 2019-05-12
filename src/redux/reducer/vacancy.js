@@ -8,6 +8,8 @@ const initialState = {
 const vacancy = (state = initialState, action = {}) => {
   switch (action.type) {
     case types.FETCH_VACANCIES:
+    case types.FETCH_COMPANY_VACANCIES:
+      // eslint-disable-next-line
       let result = action.payload;
 
       if (action.city) {
@@ -30,6 +32,11 @@ const vacancy = (state = initialState, action = {}) => {
       return {
         ...state,
         activeVacancy: action.payload,
+      };
+    case types.DELETE_VACANCY:
+      return {
+        ...state,
+        vacancies: state.vacancies.filter(v => v.vacancyId !== action.payload),
       };
     default:
       return state;

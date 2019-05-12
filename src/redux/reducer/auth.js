@@ -1,7 +1,14 @@
 import * as types from '../constants/auth';
 
-const auth = (state = {}, action = {}) => {
-  switch(action.type) {
+const initialState = {
+  user: {
+    login: 'employer@gmail.com',
+    role: 'E',
+  },
+};
+
+const auth = (state = initialState, action = {}) => {
+  switch (action.type) {
     case types.USER_LOGIN:
     case types.USER_REGISTER:
       return {

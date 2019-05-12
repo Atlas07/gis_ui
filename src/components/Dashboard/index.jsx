@@ -25,7 +25,7 @@ const Header = styled.h1`
 `;
 
 const Dashboard = ({ auth }) => {
-  const renderComponent = Users.W || Users[auth.user.role];
+  const renderComponent = Users.E || Users[auth.user.role];
 
   return (
     <Root>
